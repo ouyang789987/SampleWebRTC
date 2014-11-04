@@ -5,7 +5,7 @@ Samples for WebRTC
 
 ## File list
 `Peerjs/` Sample for Peer.js videochat  
-`+index.html` 
+`+videochat.html` 
 `+license.json` peer.js API key @JSON(* create yourself *)  
 `+js/` javascript folder  
 ` +SamplePeer.js` Sample Peer.js script  
@@ -15,4 +15,4 @@ Samples for WebRTC
 ## Setup & use
 Upload [File list] to HTTP Server.
 
-http://[your host IP]/Peerjs/index.html
+http://[your host IP]/Peerjs/videochat.html
