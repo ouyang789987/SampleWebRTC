@@ -1,5 +1,6 @@
 // Constant
-var APIKEY = './license.json';
+var APIKEY = './license.json'; // Peer.js API key
+var DEBUG = 3; // Debug level
 var MESSAGES = {
     'KEY_NOT_FOUND' : 'API key is Not Found'
 }
@@ -63,7 +64,7 @@ function setupPeerjs(apikey) {
      });
 
   // Setup peer object and callbacks
-  var peer = new Peer({key: apikey, debug : 3});
+  var peer = new Peer({key: apikey, debug : DEBUG});
 
   peer.on('open', function(id) {
       log.i(id);
