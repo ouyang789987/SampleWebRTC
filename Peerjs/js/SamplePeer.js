@@ -63,7 +63,7 @@ function setupPeerjs(apikey) {
      });
 
   // Setup peer object and callbacks
-  var peer = new Peer({key: apikey});
+  var peer = new Peer({key: apikey, debug : 3});
 
   peer.on('open', function(id) {
       log.i(id);
