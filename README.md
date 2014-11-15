@@ -14,10 +14,10 @@ Samples for WebRTC
 ` +jquery-2.1.1.js` jQuery  
 ` +peer.js` Peer.js  
 
-### Peerjs conference videochat sample
+### Peerjs mesh conference videochat sample
 `Conference/` Sample for Peer.js videochat  
-`+owner.html`  Conference owner
-`+member.html` Conference member
+`+owner.html`  Conference owner(view many members)
+`+member.html` Conference member(view only owner)
 `+license.json` peer.js API key @JSON( * create yourself * )  
 `+js/` javascript folder  
 ` +owner.js` js for conference owner  

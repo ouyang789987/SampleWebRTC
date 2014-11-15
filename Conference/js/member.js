@@ -73,6 +73,9 @@ function setupPeerjs(apikey) {
 
   // Sender Callbacs
   function callTo(peerId) {
+
+    if(!peer) {peer = new Peer({key: apikey, debug : DEBUG})};
+
     var call = peer.call(peerId, myStream);
 
     call.on('stream', function(othersStream) {

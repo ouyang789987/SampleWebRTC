@@ -15,6 +15,25 @@ var log =  {
     }
 }
 
+// Connections
+var connsMng = function() {
+  var conns = {};
+
+  return {
+    getConn : function(id) {
+      var con = null;
+      con = conns[id];
+      return con;
+    },
+    addConn : function(id, conection) {
+      if(id) { conns[id] = connection; }
+    },
+    getLength : function(id) {
+      return Object.keys(conns).length;
+    }
+  }
+}();
+
 function init() {
     var apikey;
 
@@ -73,26 +92,29 @@ function setupPeerjs(apikey) {
 
   // Sender Callbacs
   function callTo(peerId) {
+
+    if(!peer) {peer = new Peer({key: apikey, debug : DEBUG})};
+
     var call = peer.call(peerId, myStream);
 
-    call.on('stream', function(othersStream) {
-    $('#others-videos').prepend('<video style="border-style: solid; color: #000000"  width="640" height="480" autoplay></video>');
-    $('#others-videos > video:first').prop('src', URL.createObjectURL(othersStream));
-    printMd(othersStream);
-    });
+    addMember(call);
+
   }
 
   // Receiver callbacks
   peer.on('call', function(call) {
     call.answer(myStream);
 
+    addMember(call);
+  });
+
+  function addMember(call) {
     call.on('stream', function(othersStream){
       $('#others-videos').prepend('<video style="border-style: solid; color: #000000"  width="640" height="480" autoplay></video>');
       $('#others-videos > video:first').prop('src', URL.createObjectURL(othersStream));
       printMd(othersStream);
     });
-  });
-
+  }
 
   function closeCall() {
     if(peer) {
