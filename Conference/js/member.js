@@ -84,10 +84,18 @@ function setupPeerjs(apikey) {
   peer.on('call', function(call) {
     call.answer(myStream);
 
-    call.on('stream', function(othersStream){
+    call.on('stream', function(othersStream) {
       $('#others-video').prop('src', URL.createObjectURL(othersStream));
     });
   });
+
+  function closeCall() {
+    if(peer) {
+      log.i('peer.destroy()');
+      peer.destroy();
+      peer = null;
+    }
+  }
 
   // Error
   peer.on('error', function(e){
@@ -100,13 +108,8 @@ function setupPeerjs(apikey) {
   });
    // Event handler 
   $('#closeCall').on('click', function() {
-    closeCallTo();
+    closeCall();
   });
-
-  function closeCallTo() {
-    log.i(' peer destroy');
-    peer.destroy();
-  }
 
 }
 

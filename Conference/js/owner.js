@@ -76,7 +76,7 @@ function setupPeerjs(apikey) {
     var call = peer.call(peerId, myStream);
 
     call.on('stream', function(othersStream) {
-    $('#others-videos').prepend('<video style="border-style: solid; color: #000000" autoplay></video>');
+    $('#others-videos').prepend('<video style="border-style: solid; color: #000000"  width="640" height="480" autoplay></video>');
     $('#others-videos > video:first').prop('src', URL.createObjectURL(othersStream));
     printMd(othersStream);
     });
@@ -87,11 +87,20 @@ function setupPeerjs(apikey) {
     call.answer(myStream);
 
     call.on('stream', function(othersStream){
-      $('#others-videos').prepend('<video style="border-style: solid; color: #000000" autoplay></video>');
+      $('#others-videos').prepend('<video style="border-style: solid; color: #000000"  width="640" height="480" autoplay></video>');
       $('#others-videos > video:first').prop('src', URL.createObjectURL(othersStream));
       printMd(othersStream);
     });
   });
+
+
+  function closeCall() {
+    if(peer) {
+      log.i('peer.destroy()');
+      peer.destroy();
+      peer = null;
+    }
+  }
 
   // Error
   peer.on('error', function(e){
@@ -103,13 +112,8 @@ function setupPeerjs(apikey) {
     callTo($('#others-id').val());
   });
   $('#closeCall').on('click', function() {
-    closeCallTo();
+    closeCall();
   });
-
-  function closeCallTo() {
-    log.i(' peer destroy');
-    peer.destroy();
-  }
 
   // 対向のStreamを表示する
   function printMd(ostream) {
