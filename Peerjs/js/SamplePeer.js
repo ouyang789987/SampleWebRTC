@@ -59,8 +59,8 @@ function setupPeerjs(apikey) {
           $('#video').prop('src', URL.createObjectURL(stream));
      },
      function(e){
-      log.e(e);
-      console.trace(e);
+        log.e(e);
+        //console.trace(e);
      });
 
   // Setup peer object and callbacks
@@ -89,6 +89,16 @@ function setupPeerjs(apikey) {
     });
   });
 
+  // Both callbacks
+
+  function closeCall() {
+    if(peer) {
+      log.i('peer.destroy()');
+      peer.destroy();
+      peer = null;
+    }
+  }
+
   // Error
   peer.on('error', function(e){
     log.e(e.message);
@@ -98,6 +108,11 @@ function setupPeerjs(apikey) {
   $('#call').on('click', function() {
     callTo($('#others-id').val());
   });
+
+  $('#closeCall').on('click', function() {
+    closeCall();
+  });
+
 }
 
 window.addEventListener('load', init, false);
