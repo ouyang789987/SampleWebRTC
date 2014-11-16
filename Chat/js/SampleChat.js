@@ -91,7 +91,6 @@ function setupPeerjs(apikey) {
   });
 
   // Sender/Receiver callbacks
-
   function closeConnect() {
     if(peer) {
       log.i('peer.destroy()');
@@ -110,12 +109,10 @@ function setupPeerjs(apikey) {
     if( evt.which == KEY_ENTER ) {
 
       var msg = $('#sendMsg').val();
-      // console.log($('#sendMsg').val());
       if( msg == "" || conn == null) {
         return true;
       }
       var fmtdMsg = myPeerId + " - " + msg;
-      // msg = myPeerId + " - " + msg;
       conn.send(fmtdMsg);
       $('#chat').append(fmtdMsg + "<br>");
       $('#sendMsg').val("");
