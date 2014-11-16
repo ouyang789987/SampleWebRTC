@@ -30,6 +30,11 @@ var connsMng = function() {
     },
     getLength : function(id) {
       return Object.keys(conns).length;
+    },
+    getConns : function(id) {
+      var list = conns;
+
+      return list;
     }
   }
 }();
