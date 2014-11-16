@@ -5,6 +5,9 @@ Samples for WebRTC
 
 ## Project list
 
+### Chat 1:1 drawing chat
+`Chat/` Sample for Peer.js drawing chat
+
 ### Peerjs 1:1 videochat sample
 `Peerjs/` Sample for Peer.js videochat  
 `+videochat.html`  
