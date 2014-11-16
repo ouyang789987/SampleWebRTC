@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>PeerJS sample</title>
+  <script type="text/javascript" src="./js/jquery-2.1.1.js"></script>
+  <script type="text/javascript" src="./js/peer.js"></script>
+  <script type="text/javascript" src="./js/SampleChat.js"></script>
+</head>
+
+<body>
+  <p>
+    My id :
+    <div id='myID'></div>
+  </p>
+  <p>
+    Enter remote ID:
+    <input type="text" id="remoteId" placeholder="Enter remote ID" />
+    <button id="startConnect">Connect</button>
+  </p>
+  <p>
+    Enter message:
+    <input type="text" id="sendMsg" placeholder="Input chat message" />
+  </p>
+  <p>
+    <button id="closeConnect">Close connect</button>
+  </p>
+
+  <p>
+  Chat window:
+    <div id="chat">
+    </div>
+  </p>
+
+  <p>
+    User-Agent:
+    <div id="userEnv"></div>
+  </p>
+
+  <p>
+  <div id="ErrMsg"></div>
+  </p>
+</body>
+</html>
