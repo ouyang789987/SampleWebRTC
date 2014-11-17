@@ -6,25 +6,28 @@
   <script type="text/javascript" src="./js/jquery-2.1.1.js"></script>
   <script type="text/javascript" src="./js/peer.js"></script>
   <script type="text/javascript" src="./js/SampleChat.js"></script>
+  <link rel="stylesheet" type="text/css" href="./css/chat.css">
 </head>
 
 <body>
-  <p>
     My id :
-    <div id='myID'></div>
-  </p>
-  <p>
+  <div id='myID'></div>
+  
+  <h3>
+    Control window
+  </h3>
     Enter remote ID:
-    <input type="text" id="remoteId" placeholder="Enter remote ID" />
-    <button id="startConnect">Connect</button>
-  </p>
-  <p>
+  <input type="text" id="remoteId" placeholder="Enter remote ID" />
+  <button id="startConnect">Connect</button>
+  
     Enter message:
     <input type="text" id="sendMsg" placeholder="Input chat message" />
-  </p>
-  <p>
-    <button id="closeConnect">Close connect</button>
-  </p>
+    <br>
+
+  <div class="container">
+    <img class="image" src="./image.jpg">
+    <canvas id="canvas" class="canvas"></canvas>
+  </div>
 
   <p>
   Chat window:
@@ -40,5 +43,7 @@
   <p>
   <div id="ErrMsg"></div>
   </p>
+
+<button id="closeConnect">Close connect</button>
 </body>
 </html>

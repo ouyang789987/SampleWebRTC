@@ -131,4 +131,11 @@ function setupPeerjs(apikey) {
   });
 }
 
+function canvas() {
+  $('canvas').mousemove(function(evt) {
+    log.i(evt);
+  });
+}
+
 window.addEventListener('load', init, false);
+window.addEventListener('load', canvas, false);
