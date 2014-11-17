@@ -131,9 +131,23 @@ function setupPeerjs(apikey) {
   });
 }
 
+// Constants@Canvas
+var VGA_WIDHT_PX = 640;
+var VGA_HEIGHT_PX = 480;
+
 function canvas() {
-  $('canvas').mousemove(function(evt) {
-    log.i(evt);
+
+  var canvas = $('canvas')[0];
+  var ctx = canvas.getContext('2d');
+  ctx.strokeStyle = "rgb(200, 0, 0)";
+  
+  $('canvas').mousedown(function(evt) {
+    var rect = evt.target.getBoundingClientRect() ;
+    var x = evt.clientX - rect.left;
+    var y = evt.clientY - rect.top;
+    log.i(x + " " + y);
+    ctx.clearRect(0, 0, VGA_WIDHT_PX, VGA_HEIGHT_PX);
+    ctx.strokeRect(x, y, 20, 20);
   });
 }
 
