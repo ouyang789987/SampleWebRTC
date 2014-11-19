@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>PeerJS sample</title>
+  <script type="text/javascript" src="./js/jquery-2.1.1.js"></script>
+  <script type="text/javascript" src="./js/peer.js"></script>
+  <script type="text/javascript" src="./js/member.js"></script>
+</head>
+
+<body>
+ <p>
+    My id 
+    <div id='myID'></div>
+  </p>
+  <p>
+    Enter id:
+    <input type="text" id="others-id" placeholder="Input Others ID" /><button id="call">Call</button>
+    <br>
+    <button id="closeCall">Close</button>
+    </p>
+
+  Others:
+  <br>
+  <video id="others-video" style="border-style: solid; color: #000000" width="640" height="480" autoplay></video>
+
+  <br>
+  Me:
+  <br>
+  <video id="video" style="border-style: solid; color: #000000" width="640" height="480" autoplay muted></video>
+
+ 
+  <p>
+    User-Agent:
+    <div id="ua"></div>
+  </p>
+
+  <p>
+  <div id="error"></div>
+  </p>
+</body>
+</html>

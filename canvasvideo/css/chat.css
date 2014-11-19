@@ -1,0 +1,20 @@
+.container {
+  width:  640px;
+  height: 480px;
+
+  position: relative;
+}
+
+.image {
+  width:  640px;
+  height: 480px;
+  border: blue solid 1px;
+  position: absolute;
+  z-index: 10;
+}
+
+.canvas {
+  border: red solid 1px;
+  position: absolute;
+  z-index: 20;
+}
