@@ -7,20 +7,24 @@
   <script type="text/javascript" src="./js/peer.js"></script>
   <script type="text/javascript" src="./js/CONST_OPERATOR.js"></script>
   <script type="text/javascript" src="./js/operator.js"></script>
-  <script type="text/javascript" src="./js/wscanvas.js"></script>
+  <script type="text/javascript" src="./js/operator-canvas.js"></script>
   <link rel="stylesheet" type="text/css" href="./css/chat.css">
 </head>
 
 <body>
   <h1>Operator page</h1>
   <li>
-    My id : <span id='myID'></span>
+    My id : <span id='my-id'></span>
   </li>
-  <li>
+<!--   <li>
     Enter id:
-    <input type="text" id="others-id" placeholder="Input Others ID" />
+    <input type="text" id="remote-id" placeholder="Input Others ID" />
     <button id="call">Call</button>
+  </li> -->
+  <li>
+    Connected remote id:
   </li>
+  <div id='remote-ids'></div>
   
   <br>
 
@@ -28,18 +32,18 @@
   Control button
     
   </li>
-  <button id="closeCall">Close call</button>
+  <button id="close-call">Close call</button>
   
   <li>
   Remote video
   </li>
-  <video id="others-video" class="video" autoplay muted></video>
+  <video id="remote-videos" class="video" autoplay muted></video>
 
   <li>
   My video
   </li>
   <div id="container" class="container">
-    <video id="video" class="overlayVideo" autoplay muted></video>
+    <video id="my-video" class="overlayVideo" autoplay muted></video>
     <canvas id="canvas" class="canvas" width="640px" height="480px"></canvas>
   </div>
 
@@ -50,6 +54,10 @@
 
   <li>
     Error message : <span id="error"></span>
+  </li>
+
+  <li>
+    received data<textarea id="textarea" cols="20" rows="1"></textarea>
   </li>
 
 </body>

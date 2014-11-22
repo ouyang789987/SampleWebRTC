@@ -5,6 +5,9 @@ var MESSAGES = {
     'KEY_NOT_FOUND' : 'API key is Not Found'
 }
 
+// Data connection
+var conn = null;
+
 // Logging
 var log =  {
     i : function(msg) {
@@ -80,7 +83,7 @@ function setupPeerjs(apikey) {
       {audio : true, video : true},
       function(stream) {
           myStream = stream;
-          $('#video').prop('src', URL.createObjectURL(stream));
+          $('#my-video').prop('src', URL.createObjectURL(stream));
      },
      function(e){
       log.e(e);
@@ -92,31 +95,41 @@ function setupPeerjs(apikey) {
 
   peer.on('open', function(id) {
       log.i(id);
-      $('#myID').html(id);
+      $('#my-id').html(id);
   });
-
-  // Sender Callbacs
-  function callTo(peerId) {
-
-    if(!peer) {peer = new Peer({key: apikey, debug : DEBUG})};
-
-    var call = peer.call(peerId, myStream);
-
-    addMember(call);
-
-  }
 
   // Receiver callbacks
   peer.on('call', function(call) {
+    log.i('Receive Calling');
     call.answer(myStream);
 
     addMember(call);
   });
 
+  peer.on('connection', function(c) {
+    log.i('connect ' + c.label);
+
+    // Remind remote connection
+    conn = c;
+    c.on('open', function() {
+      log.i('open');
+      c.on('data', function(data) {
+        var msg = data;
+        log.i('conn - receieved : ' + msg);
+        $('#textarea').val(msg);
+        //$('#chat').append(msg + "<br>");
+
+        // TODO : WebSocketに置き換える
+        setTimeout( function() {c.send(msg)}, TIMEOUT_MILLS );
+      });
+    });
+  });
+
   function addMember(call) {
+    log.i('addMember()');
     call.on('stream', function(othersStream){
-      $('#others-videos').prepend('<video style="border-style: solid; color: #000000"  width="640" height="480" autoplay></video>');
-      $('#others-videos > video:first').prop('src', URL.createObjectURL(othersStream));
+      log.i('addMember() - stream');
+      $('#remote-videos').prop('src', URL.createObjectURL(othersStream));
       printMd(othersStream);
     });
   }
@@ -136,7 +149,7 @@ function setupPeerjs(apikey) {
 
   // Event handler 
   $('#call').on('click', function() {
-    callTo($('#others-id').val());
+    callTo($('#remote-id').val());
   });
   $('#closeCall').on('click', function() {
     closeCall();
@@ -144,7 +157,7 @@ function setupPeerjs(apikey) {
 
   // 対向のStreamを表示する
   function printMd(ostream) {
-    $('#labels').append("<div>" + ostream.label  + "</div>");
+    $('#remote-ids').append("<div>" + ostream.label  + "</div>");
   }
 
 }

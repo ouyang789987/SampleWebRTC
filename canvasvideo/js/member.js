@@ -5,6 +5,10 @@ var MESSAGES = {
     'KEY_NOT_FOUND' : 'API key is Not Found'
 }
 
+// Global instance field
+// Data connection
+var conn = null;
+
 // Logging
 var log =  {
     i : function(msg) {
@@ -56,7 +60,7 @@ function setupPeerjs(apikey) {
       {audio : true, video : true},
       function(stream) {
           myStream = stream;
-          $('#video').prop('src', URL.createObjectURL(stream));
+          $('#my-video').prop('src', URL.createObjectURL(stream));
      },
      function(e){
       log.e(e);
@@ -66,20 +70,53 @@ function setupPeerjs(apikey) {
   // Setup peer object and callbacks
   var peer = new Peer({key: apikey, debug : DEBUG});
 
+  var myPeerId = "";
+
+  // DataConnection
+  // var conn = null;
+
   peer.on('open', function(id) {
       log.i(id);
-      $('#myID').html(id);
+      $('#my-id').html(id);
   });
 
   // Sender Callbacs
   function callTo(peerId) {
 
+    log.i("CallTo()");
     if(!peer) {peer = new Peer({key: apikey, debug : DEBUG})};
 
     var call = peer.call(peerId, myStream);
 
     call.on('stream', function(othersStream) {
-    $('#others-video').prop('src', URL.createObjectURL(othersStream));
+    $('#remote-video').prop('src', URL.createObjectURL(othersStream));
+    });
+  }
+
+  function connectTo(myPeer, remotePeerId, myPeerId) {
+      log.i("connectTo()");
+
+    if(!conn) { conn = myPeer.connect(remotePeerId, {label : myPeerId}) }; 
+
+    conn.on('open', function() {
+      conn.on('data', function(data) {
+        var msg = data;
+
+        log.i('conn sender - receieved : ' + msg);
+        $('#textarea').val(msg);
+
+        var axis = data.split( ',' );
+        var x = axis[0];
+        var y = axis[1];
+
+        var canvas = $('canvas')[0];
+        var ctx = canvas.getContext('2d');
+        ctx.strokeStyle = "rgb(204, 0, 0)";
+
+        ctx.clearRect(0, 0, VGA_WIDTH_PX, VGA_HEIGHT_PX);
+        ctx.strokeRect(x, y, 40, 40);
+
+      });
     });
   }
 
@@ -88,7 +125,27 @@ function setupPeerjs(apikey) {
     call.answer(myStream);
 
     call.on('stream', function(othersStream) {
-      $('#others-video').prop('src', URL.createObjectURL(othersStream));
+      $('#remote-video').prop('src', URL.createObjectURL(othersStream));
+    });
+  });
+
+  peer.on('connection', function(c) {
+    log.i('connect ' + c.label);
+
+    // Remind remote connection
+    conn = c;
+    c.on('open', function() {
+      log.i('open');
+      c.on('data', function(data) {
+        var msg = data;
+
+        log.i('conn receiver - receieved : ' + msg);
+        $('#textarea').val(msg);
+
+        var axis = data.split( ',' );
+        var x = axis[0];
+        var y = axis[1];
+      });
     });
   });
 
@@ -107,10 +164,14 @@ function setupPeerjs(apikey) {
 
   // Event handler 
   $('#call').on('click', function() {
-    callTo($('#others-id').val());
+    if( $('#remoteId').val() == "") {
+      return true;
+    } 
+    callTo($('#remote-id').val());
+    connectTo(peer, $('#remote-id').val(), myPeerId);
   });
    // Event handler 
-  $('#closeCall').on('click', function() {
+  $('#close-call').on('click', function() {
     closeCall();
   });
 
