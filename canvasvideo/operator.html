@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Operator</title>
+  <script type="text/javascript" src="./js/jquery-2.1.1.js"></script>
+  <script type="text/javascript" src="./js/peer.js"></script>
+  <script type="text/javascript" src="./js/CONST_OPERATOR.js"></script>
+  <script type="text/javascript" src="./js/operator.js"></script>
+  <script type="text/javascript" src="./js/wscanvas.js"></script>
+  <link rel="stylesheet" type="text/css" href="./css/chat.css">
+</head>
+
+<body>
+  <h1>Operator page</h1>
+  <li>
+    My id : <span id='myID'></span>
+  </li>
+  <li>
+    Enter id:
+    <input type="text" id="others-id" placeholder="Input Others ID" />
+    <button id="call">Call</button>
+  </li>
+  
+  <br>
+
+  <li>
+  Control button
+    
+  </li>
+  <button id="closeCall">Close call</button>
+  
+  <li>
+  Remote video
+  </li>
+  <video id="others-video" class="video" autoplay muted></video>
+
+  <li>
+  My video
+  </li>
+  <div id="container" class="container">
+    <video id="video" class="overlayVideo" autoplay muted></video>
+    <canvas id="canvas" class="canvas" width="640px" height="480px"></canvas>
+  </div>
+
+ 
+  <li>
+    User-Agent : <span id="ua"></span>
+  </li>
+
+  <li>
+    Error message : <span id="error"></span>
+  </li>
+
+</body>
+</html>
