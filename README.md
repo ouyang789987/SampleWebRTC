@@ -31,4 +31,4 @@ Samples for WebRTC
 ## Setup & use
 Upload [File list] to HTTP Server.
  and access
-http://[your host IP]/[Project]
+http://[your host IP:PORT]/[Project]

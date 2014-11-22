@@ -9,34 +9,40 @@
 </head>
 
 <body>
- <p>
-    My id 
-    <div id='myID'></div>
-  </p>
-  <p>
+ <li>
+    My id : <span id='myID'></span>
+  </li>
+  <li>
     Enter id:
     <input type="text" id="others-id" placeholder="Input Others ID" /><button id="call">Call</button>
-    <br>
-    <button id="closeCall">Close</button>
-    </p>
+  </li>
+  
+  <br>
 
-  Others:
-  <br>
-  <video id="others-video" style="border-style: solid; color: #000000" width="640" height="480" autoplay></video>
+  <li>
+  Control button
+    
+  </li>
+  <button id="closeCall">Close call</button>
+  
+  <li>
+  Remote video
+  </li>
+  <video id="others-video" style="border-style: solid; color: #000000" width="640" height="480" autoplay muted></video>
 
-  <br>
-  Me:
-  <br>
+  <li>
+  My video
+  </li>
   <video id="video" style="border-style: solid; color: #000000" width="640" height="480" autoplay muted></video>
 
  
-  <p>
-    User-Agent:
-    <div id="ua"></div>
-  </p>
+  <li>
+    User-Agent : <span id="ua"></span>
+  </li>
 
-  <p>
-  <div id="error"></div>
-  </p>
+  <li>
+    Error message : <span id="error"></span>
+  </li>
+
 </body>
 </html>
