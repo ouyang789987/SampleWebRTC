@@ -17,8 +17,6 @@ var JSON_KEY_ANNOTATION_MARKER_POINT_X = "point_x";
 var JSON_KEY_ANNOTATION_MARKER_POINT_Y = "point_y";
 
 // WebSocket connection
-//var IP = "192.168.162.138";
-//var IP = "192.168.162.72";
 var WS_PORT = "3001";
 var PREFIX = "ws";
 
