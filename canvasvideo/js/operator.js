@@ -116,11 +116,11 @@ function setupPeerjs(apikey) {
       c.on('data', function(data) {
         var msg = data;
         log.i('conn - receieved : ' + msg);
-        $('#textarea').val(msg);
+        $('#receivedAxis').val(msg);
         //$('#chat').append(msg + "<br>");
 
         // TODO : WebSocketに置き換える
-        setTimeout( function() {c.send(msg)}, TIMEOUT_MILLS );
+        setTimeout( function() {c.send(msg); $('#sendAxis').val(msg);}, TIMEOUT_MILLS );
       });
     });
   });

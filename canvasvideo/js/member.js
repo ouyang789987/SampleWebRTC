@@ -89,7 +89,7 @@ function setupPeerjs(apikey) {
     var call = peer.call(peerId, myStream);
 
     call.on('stream', function(othersStream) {
-    $('#remote-video').prop('src', URL.createObjectURL(othersStream));
+      // $('#remote-video').prop('src', URL.createObjectURL(othersStream));
     });
   }
 
@@ -103,7 +103,7 @@ function setupPeerjs(apikey) {
         var msg = data;
 
         log.i('conn sender - receieved : ' + msg);
-        $('#textarea').val(msg);
+        $('#receivedAxis').val(msg);
 
         var axis = data.split( ',' );
         var x = axis[0];
@@ -115,7 +115,6 @@ function setupPeerjs(apikey) {
 
         ctx.clearRect(0, 0, VGA_WIDTH_PX, VGA_HEIGHT_PX);
         ctx.strokeRect(x, y, 40, 40);
-
       });
     });
   }
@@ -140,7 +139,7 @@ function setupPeerjs(apikey) {
         var msg = data;
 
         log.i('conn receiver - receieved : ' + msg);
-        $('#textarea').val(msg);
+        $('#receivedAxis').val(msg);
 
         var axis = data.split( ',' );
         var x = axis[0];
