@@ -93,44 +93,42 @@ function setupPeerjs(apikey) {
   // Setup peer object and callbacks
   var peer = new Peer({key: apikey, debug : DEBUG});
 
+  var myPeerId = "";
+
   peer.on('open', function(id) {
       log.i(id);
+      myPeerId = id;
       $('#my-id').html(id);
   });
 
-  // Receiver callbacks
-  peer.on('call', function(call) {
-    log.i('Receive Calling');
-    call.answer(myStream);
+  // Sender Callbacs
+  function callTo(peerId) {
 
-    addMember(call);
-  });
+    log.i("CallTo()");
+    if(!peer) {peer = new Peer({key: apikey, debug : DEBUG})};
 
-  peer.on('connection', function(c) {
-    log.i('connect ' + c.label);
+    var call = peer.call(peerId, myStream);
 
-    // Remind remote connection
-    conn = c;
-    c.on('open', function() {
-      log.i('open');
-      c.on('data', function(data) {
+    call.on('stream', function(othersStream) {
+      $('#remote-videos').prop('src', URL.createObjectURL(othersStream));
+    });
+  }
+
+  function connectTo(myPeer, remotePeerId, myPeerId) {
+      log.i("connectTo()");
+
+    if(!conn) { conn = myPeer.connect(remotePeerId, {label : myPeerId}) }; 
+
+    conn.on('open', function() {
+      log.i('DataChannel sender open');
+      conn.on('data', function(data) {
         var msg = data;
         log.i('conn - receieved : ' + msg);
         $('#receivedAxis').val(msg);
-        //$('#chat').append(msg + "<br>");
 
         // TODO : WebSocketに置き換える
-        setTimeout( function() {c.send(msg); $('#sendAxis').val(msg);}, TIMEOUT_MILLS );
+        setTimeout( function() {conn.send(msg); $('#sendAxis').val(msg);}, TIMEOUT_MILLS );
       });
-    });
-  });
-
-  function addMember(call) {
-    log.i('addMember()');
-    call.on('stream', function(othersStream){
-      log.i('addMember() - stream');
-      $('#remote-videos').prop('src', URL.createObjectURL(othersStream));
-      printMd(othersStream);
     });
   }
 
@@ -147,15 +145,16 @@ function setupPeerjs(apikey) {
     log.e(e.message);
   });
 
-  // Event handler 
+  // User event callback
   $('#call').on('click', function() {
+    if( $('#remoteId').val() == "") {
+      return true;
+    } 
     callTo($('#remote-id').val());
-  });
-  $('#closeCall').on('click', function() {
-    closeCall();
+    connectTo(peer, $('#remote-id').val(), myPeerId);
   });
 
-  // 対向のStreamを表示する
+  // 対向のPeer IDを表示する
   function printMd(ostream) {
     $('#remote-ids').append("<div>" + ostream.label  + "</div>");
   }

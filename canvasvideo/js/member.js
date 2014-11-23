@@ -72,52 +72,10 @@ function setupPeerjs(apikey) {
 
   var myPeerId = "";
 
-  // DataConnection
-  // var conn = null;
-
   peer.on('open', function(id) {
       log.i(id);
       $('#my-id').html(id);
   });
-
-  // Sender Callbacs
-  function callTo(peerId) {
-
-    log.i("CallTo()");
-    if(!peer) {peer = new Peer({key: apikey, debug : DEBUG})};
-
-    var call = peer.call(peerId, myStream);
-
-    call.on('stream', function(othersStream) {
-      // $('#remote-video').prop('src', URL.createObjectURL(othersStream));
-    });
-  }
-
-  function connectTo(myPeer, remotePeerId, myPeerId) {
-      log.i("connectTo()");
-
-    if(!conn) { conn = myPeer.connect(remotePeerId, {label : myPeerId}) }; 
-
-    conn.on('open', function() {
-      conn.on('data', function(data) {
-        var msg = data;
-
-        log.i('conn sender - receieved : ' + msg);
-        $('#receivedAxis').val(msg);
-
-        var axis = data.split( ',' );
-        var x = axis[0];
-        var y = axis[1];
-
-        var canvas = $('canvas')[0];
-        var ctx = canvas.getContext('2d');
-        ctx.strokeStyle = "rgb(204, 0, 0)";
-
-        ctx.clearRect(0, 0, VGA_WIDTH_PX, VGA_HEIGHT_PX);
-        ctx.strokeRect(x, y, 40, 40);
-      });
-    });
-  }
 
   // Receiver callbacks
   peer.on('call', function(call) {
@@ -126,25 +84,40 @@ function setupPeerjs(apikey) {
     call.on('stream', function(othersStream) {
       $('#remote-video').prop('src', URL.createObjectURL(othersStream));
     });
+
+    call.on('stream', function(remoteStream){
+      log.i('addMember() - stream');
+      $('#remote-videos').prop('src', URL.createObjectURL(remoteStream));
+    });
+
   });
 
+  // DataConnection
   peer.on('connection', function(c) {
     log.i('connect ' + c.label);
 
     // Remind remote connection
     conn = c;
     c.on('open', function() {
-      log.i('open');
+      log.i('DataChannel open');
       c.on('data', function(data) {
         var msg = data;
 
-        log.i('conn receiver - receieved : ' + msg);
+        log.i('DataChannel - receieved : ' + msg);
         $('#receivedAxis').val(msg);
 
         var axis = data.split( ',' );
         var x = axis[0];
         var y = axis[1];
+        var canvas = $('canvas')[0];
+        var ctx = canvas.getContext('2d');
+        ctx.strokeStyle = "rgb(204, 0, 0)";
+
+        ctx.clearRect(0, 0, VGA_WIDTH_PX, VGA_HEIGHT_PX);
+        ctx.strokeRect(x, y, 40, 40);
       });
+
+      printRemoteLabel(c.label);
     });
   });
 
@@ -161,18 +134,16 @@ function setupPeerjs(apikey) {
     log.e(e.message);
   });
 
-  // Event handler 
-  $('#call').on('click', function() {
-    if( $('#remoteId').val() == "") {
-      return true;
-    } 
-    callTo($('#remote-id').val());
-    connectTo(peer, $('#remote-id').val(), myPeerId);
-  });
-   // Event handler 
+  // User event callback
   $('#close-call').on('click', function() {
     closeCall();
   });
+
+  // 対向のPeer IDを表示する
+  function printRemoteLabel(remoteLabel) {
+    $('#remote-ids').append("<div>" + remoteLabel + "</div>");
+  }
+
 
 }
 

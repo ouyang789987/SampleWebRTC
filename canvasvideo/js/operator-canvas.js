@@ -34,11 +34,10 @@ function canvasInit() {
     log.i(x + " " + y);
     ctx.clearRect(0, 0, VGA_WIDHT_PX, VGA_HEIGHT_PX);
     ctx.strokeRect(x, y, 20, 20);
-    
   });
 
 
 }
 
 window.addEventListener('load', websocketInit, false);
-window.addEventListener('load', canvasInit, false);
+// window.addEventListener('load', canvasInit, false);

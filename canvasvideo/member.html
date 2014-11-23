@@ -2,6 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width">
   <title>Member</title>
   <script type="text/javascript" src="./js/jquery-2.1.1.js"></script>
   <script type="text/javascript" src="./js/peer.js"></script>
@@ -16,13 +17,13 @@
   <li>
     My id : <span id='my-id'></span>
   </li>
-  <li>
-    Enter id:
-    <input type="text" id="remote-id" placeholder="Input Others ID" />
-    <button id="call">Call</button>
-  </li>
-  
+
   <br>
+
+  <li>
+    Connected remote id:
+  </li>
+  <div id='remote-ids'></div>
 
   <li>
   Control button
@@ -49,10 +50,11 @@
   
   <li>
     Send axis : <textarea id="sendAxis" cols="20" rows="1"></textarea>
+    <br>
     Received axis : <textarea id="receivedAxis" cols="20" rows="1"></textarea>
   </li>
   <li>
-    Event : <textarea id="detectEvent" cols="20" rows="1"></textarea>
+    Event : <textarea id="detectEvent" cols="40" rows="1"></textarea>
   </li>
 
 
