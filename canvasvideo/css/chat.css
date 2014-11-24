@@ -24,3 +24,7 @@
   height: 480px;
   border: green solid 1px;
 }
+
+.hiddenVideo {
+  display: none;  
+}

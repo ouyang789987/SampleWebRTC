@@ -81,6 +81,7 @@ function setupPeerjs(apikey) {
 
   navigator.getUserMedia(
       {audio : true, video : true},
+      // {audio : true, video : false},
       function(stream) {
           myStream = stream;
           $('#my-video').prop('src', URL.createObjectURL(stream));
@@ -160,15 +161,15 @@ function setupPeerjs(apikey) {
   });
 
   // ミュート/非ミュートの切り替え
-  $('#mute').on('click', function() {
+  $('#remote-mute').on('click', function() {
     var isMute = $('#remote-videos').prop('muted');
 
     if( isMute ) {
       $('#remote-videos').prop('muted', false);
-      $('#mute').text('Mute');
+      $('#remote-mute').text('Remote Mute');
     } else {
       $('#remote-videos').prop('muted', true);
-      $('#mute').text('Unmute');
+      $('#remote-mute').text('Remote Unmute');
     }
   });
 

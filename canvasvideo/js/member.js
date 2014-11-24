@@ -84,12 +84,6 @@ function setupPeerjs(apikey) {
     call.on('stream', function(othersStream) {
       $('#remote-video').prop('src', URL.createObjectURL(othersStream));
     });
-
-    call.on('stream', function(remoteStream){
-      log.i('addMember() - stream');
-      $('#remote-videos').prop('src', URL.createObjectURL(remoteStream));
-    });
-
   });
 
   // DataConnection
@@ -142,13 +136,26 @@ function setupPeerjs(apikey) {
   // ミュート/非ミュートの切り替え
   $('#mute').on('click', function() {
     var isMute = $('#my-video').prop('muted');
-    
+
     if( isMute ) {
       $('#my-video').prop('muted', false);
       $('#mute').text('Mute');
     } else {
       $('#my-video').prop('muted', true);
       $('#mute').text('Unmute');
+    }
+  });
+
+    // ミュート/非ミュートの切り替え
+  $('#remote-mute').on('click', function() {
+    var isMute = $('#remote-video').prop('muted');
+
+    if( isMute ) {
+      $('#remote-video').prop('muted', false);
+      $('#remote-mute').text('Remote Mute');
+    } else {
+      $('#remote-video').prop('muted', true);
+      $('#remote-mute').text('Remote Unmute');
     }
   });
 

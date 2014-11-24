@@ -31,6 +31,7 @@
   Control button
   </li>
   <button id="mute" style='font-size:30px'>Mute</button>
+  <button id="remote-mute" style='font-size:30px'>Remote Mute</button>
   <br><br>
   <button id="close-call" style='font-size:20px'>Close call</button>
   
@@ -41,7 +42,6 @@
     <video id="my-video" class="overlayVideo" autoplay muted></video>
     <canvas id="canvas" class="canvas" width="640px" height="480px"></canvas>
   </div>
-
  
   <li>
     User-Agent : <span id="ua"></span>
@@ -61,6 +61,13 @@
   <li>
     Event : <textarea id="detectEvent" cols="40" rows="1"></textarea>
   </li>
+
+
+  <li>
+  Remote video(display:none)
+  </li>
+    <video id="remote-video" class="hiddenVideo" autoplay></video>
+  </div>
 
 
 </body>
