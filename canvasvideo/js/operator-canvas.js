@@ -14,7 +14,8 @@ function websocketInit() {
 	}
 
 	ws.onmessage = function(elm) {
-		console.log(elm);
+    var axis = elm.data;
+    conn.send(axis);
 	}
 }
 

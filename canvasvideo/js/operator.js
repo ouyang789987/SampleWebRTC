@@ -128,8 +128,10 @@ function setupPeerjs(apikey) {
         log.i('conn - receieved : ' + msg);
         $('#receivedAxis').val(msg);
 
-        // TODO : WebSocketに置き換える
-        setTimeout( function() {conn.send(msg); $('#sendAxis').val(msg);}, TIMEOUT_MILLS );
+
+        // setTimeout(msg function() {conn.send(msg); $('#sendAxis').val(msg);}, TIMEOUT_MILLS );
+        setTimeout(function() {ws.send(msg); $('#sendAxis').val(msg);}, TIMEOUT_MILLS );
+        
       });
     });
   }
