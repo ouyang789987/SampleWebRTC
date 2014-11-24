@@ -134,9 +134,22 @@ function setupPeerjs(apikey) {
     log.e(e.message);
   });
 
-  // User event callback
+  /* User event handler */
   $('#close-call').on('click', function() {
     closeCall();
+  });
+
+  // ミュート/非ミュートの切り替え
+  $('#mute').on('click', function() {
+    var isMute = $('#my-video').prop('muted');
+    
+    if( isMute ) {
+      $('#my-video').prop('muted', false);
+      $('#mute').text('Mute');
+    } else {
+      $('#my-video').prop('muted', true);
+      $('#mute').text('Unmute');
+    }
   });
 
   // 対向のPeer IDを表示する

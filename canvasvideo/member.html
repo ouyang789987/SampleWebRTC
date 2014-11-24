@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <!-- mobileはドラッグ操作でウィンドウがズれるためズーム不可にする -->
   <meta name="viewport" 
-  content="width=device-width, initial-scale=1.0, user-scalable=no">
+  content="user-scalable=no">
   <title>Member</title>
   <script type="text/javascript" src="./js/jquery-2.1.1.js"></script>
   <script type="text/javascript" src="./js/peer.js"></script>
@@ -29,9 +29,10 @@
 
   <li>
   Control button
-    
   </li>
-  <button id="close-call">Close call</button>
+  <button id="mute" style='font-size:30px'>Mute</button>
+  <br><br>
+  <button id="close-call" style='font-size:20px'>Close call</button>
   
   <li>
   My video
@@ -56,7 +57,7 @@
   <li>
     Received axis : <textarea id="receivedAxis" cols="40" rows="1"></textarea>
   </li>
-  
+
   <li>
     Event : <textarea id="detectEvent" cols="40" rows="1"></textarea>
   </li>

@@ -159,6 +159,19 @@ function setupPeerjs(apikey) {
     closeCall();
   });
 
+  // ミュート/非ミュートの切り替え
+  $('#mute').on('click', function() {
+    var isMute = $('#remote-videos').prop('muted');
+
+    if( isMute ) {
+      $('#remote-videos').prop('muted', false);
+      $('#mute').text('Mute');
+    } else {
+      $('#remote-videos').prop('muted', true);
+      $('#mute').text('Unmute');
+    }
+  });
+
   // 対向のPeer IDを表示する
   function printRemoteLabel(remoteLabel) {
     $('#remote-ids').append("<div>" + remoteLabel + "</div>");
