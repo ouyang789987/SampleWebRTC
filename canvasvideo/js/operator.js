@@ -137,7 +137,6 @@ function setupPeerjs(apikey) {
       log.i('peer.destroy()');
       peer.destroy();
       peer = null;
-      conn = null;
     }
   }
 
@@ -155,9 +154,14 @@ function setupPeerjs(apikey) {
     connectTo(peer, $('#remote-id').val(), myPeerId);
   });
 
+  // User event callback
+  $('#close-call').on('click', function() {
+    closeCall();
+  });
+
   // 対向のPeer IDを表示する
-  function printMd(ostream) {
-    $('#remote-ids').append("<div>" + ostream.label  + "</div>");
+  function printRemoteLabel(remoteLabel) {
+    $('#remote-ids').append("<div>" + remoteLabel + "</div>");
   }
 
 }
