@@ -7,10 +7,10 @@ function canvasInit() {
   // タッチイベントのサポート可否を調べる
   var isTouch = ('ontouchstart' in window);
   if( isTouch ) {
+    console.log('onTouch');
     $('canvas').bind('touchmove', function() { trackingTouch(); }); 
-  } else {
-    $('canvas').mousemove(function(evt) {trackingMouse(evt);});    
   }
+  $('canvas').mousemove(function(evt){ trackingMouse(evt);} );
 }
 
 // タッチの軌跡を取得する
@@ -24,6 +24,7 @@ function trackingTouch() {
 
   var frmtMsg = x + "," + y;
 
+  console.log(frmtMsg);
   if(conn == null) {
     return true;
   }
@@ -42,6 +43,7 @@ function trackingMouse(evt) {
   var y = evt.clientY - rect.top;
 
   var frmtMsg = x + "," + y;
+  console.log(frmtMsg);
   if(conn == null) {
     return true;
   }
