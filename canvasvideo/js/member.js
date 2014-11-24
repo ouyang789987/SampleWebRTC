@@ -123,7 +123,7 @@ function setupPeerjs(apikey) {
 
   function closeCall() {
     if(peer) {
-      log.i('peer.destroy()');
+      log.i('closeCall()');
       peer.destroy();
       peer = null;
     }
@@ -143,8 +143,6 @@ function setupPeerjs(apikey) {
   function printRemoteLabel(remoteLabel) {
     $('#remote-ids').append("<div>" + remoteLabel + "</div>");
   }
-
-
 }
 
 window.addEventListener('load', init, false);

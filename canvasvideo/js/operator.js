@@ -137,6 +137,7 @@ function setupPeerjs(apikey) {
       log.i('peer.destroy()');
       peer.destroy();
       peer = null;
+      conn = null;
     }
   }
 
