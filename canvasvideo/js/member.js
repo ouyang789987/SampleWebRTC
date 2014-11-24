@@ -35,6 +35,7 @@ function init() {
 
     printUA();
     setupPeerjs(apikey);
+    initUI();
 }
 
 // User-Agentをブラウザに表示する
@@ -146,15 +147,15 @@ function setupPeerjs(apikey) {
     }
   });
 
-    // ミュート/非ミュートの切り替え
-  $('#remote-mute').on('click', function() {
+  // ミュート/非ミュートの切り替え
+ $('#remote-mute').on('click', function() {
     var isMute = $('#remote-video').prop('muted');
 
     if( isMute ) {
       $('#remote-video').prop('muted', false);
       $('#remote-mute').text('Remote Mute');
     } else {
-      $('#remote-video').prop('muted', true);
+      $('#remote-video').prop('muted', true)
       $('#remote-mute').text('Remote Unmute');
     }
   });
@@ -162,6 +163,28 @@ function setupPeerjs(apikey) {
   // 対向のPeer IDを表示する
   function printRemoteLabel(remoteLabel) {
     $('#remote-ids').append("<div>" + remoteLabel + "</div>");
+  }
+}
+
+function initUI(){
+  var isMute = $('#my-video').prop('muted');
+
+  if( isMute ) {
+    $('#my-video').prop('muted', false);
+    $('#mute').text('Mute');
+  } else {
+    $('#my-video').prop('muted', true);
+    $('#mute').text('Unmute');
+  }
+
+  isMute = $('#remote-video').prop('muted');
+
+  if( isMute ) {
+    $('#remote-video').prop('muted', false);
+    $('#remote-mute').text('Remote Mute');
+  } else {
+    $('#remote-video').prop('muted', true);
+    $('#remote-mute').text('Remote Unmute');
   }
 }
 
