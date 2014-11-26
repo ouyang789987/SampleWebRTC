@@ -106,6 +106,7 @@ function setupPeerjs(apikey) {
         var y = axis[1];
         var canvas = $('canvas')[0];
         var ctx = canvas.getContext('2d');
+        ctx.lineWidth = 10;
         ctx.strokeStyle = "rgb(204, 0, 0)";
 
         ctx.clearRect(0, 0, VGA_WIDTH_PX, VGA_HEIGHT_PX);
