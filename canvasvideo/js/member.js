@@ -110,7 +110,9 @@ function setupPeerjs(apikey) {
         ctx.strokeStyle = "rgb(204, 0, 0)";
 
         ctx.clearRect(0, 0, VGA_WIDTH_PX, VGA_HEIGHT_PX);
-        ctx.strokeRect(x, y, 40, 40);
+        ctx.strokeRect(x - MARKER_SIZE_Y/2,
+                               y - MARKER_SIZE_Y/2,
+                               MARKER_SIZE_X, MARKER_SIZE_Y);
       });
 
       printRemoteLabel(c.label);
