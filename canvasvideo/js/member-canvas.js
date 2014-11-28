@@ -37,14 +37,15 @@ function trackingTouch() {
 // マウスの軌跡を取得する
 var rect = null;
 var x, y = 0;
+var frmtMsg ="";
 function trackingMouse(evt) {
   $('#detectEvent').val(evt.type);
   
-  var rect = evt.target.getBoundingClientRect();
+  rect = evt.target.getBoundingClientRect();
   x = evt.clientX - rect.left;
   y = evt.clientY - rect.top;
 
-  var frmtMsg = x + "," + y;
+  frmtMsg = x + "," + y;
 
   if(conn === null) {
     return true;
