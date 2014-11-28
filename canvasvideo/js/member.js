@@ -3,7 +3,7 @@ var APIKEY = './license.json'; // Peer.js API key
 var DEBUG = 3; // Debug level
 var MESSAGES = {
     'KEY_NOT_FOUND' : 'API key is Not Found'
-}
+};
 
 // Global instance field
 // Data connection
@@ -17,7 +17,7 @@ var log =  {
     e : function(msg) {
       console.error('Error : ' + msg);
     }
-}
+};
 
 function init() {
     var apikey;
@@ -158,7 +158,7 @@ function setupPeerjs(apikey) {
       $('#remote-video').prop('muted', false);
       $('#remote-mute').text('Remote Mute');
     } else {
-      $('#remote-video').prop('muted', true)
+      $('#remote-video').prop('muted', true);
       $('#remote-mute').text('Remote Unmute');
     }
   });

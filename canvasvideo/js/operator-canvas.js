@@ -7,16 +7,16 @@ log.i(wsURL);
 
 function websocketInit() {
 	ws = new WebSocket(wsURL);
-	ws.binaryType = 'blob'
+	ws.binaryType = 'blob';
 
 	ws.onopen = function() {
 		log.i('Open WebSocket conection');
-	}
+	};
 
 	ws.onmessage = function(elm) {
     var axis = elm.data;
     conn.send(axis);
-	}
+	};
 }
 
 // Constants@Canvas

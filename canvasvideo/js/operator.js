@@ -3,7 +3,7 @@ var APIKEY = './license.json'; // Peer.js API key
 var DEBUG = 3; // Debug level
 var MESSAGES = {
     'KEY_NOT_FOUND' : 'API key is Not Found'
-}
+};
 
 // Data connection
 var conn = null;
@@ -16,7 +16,7 @@ var log =  {
     e : function(msg) {
       console.error('Error : ' + msg);
     }
-}
+};
 
 // Connections
 var connsMng = function() {
@@ -39,7 +39,7 @@ var connsMng = function() {
 
       return list;
     }
-  }
+  };
 }();
 
 function init() {
@@ -107,7 +107,7 @@ function setupPeerjs(apikey) {
   function callTo(peerId) {
 
     log.i("CallTo()");
-    if(!peer) {peer = new Peer({key: apikey, debug : DEBUG})};
+    if(!peer) {peer = new Peer( {key: apikey, debug : DEBUG});}
 
     var call = peer.call(peerId, myStream);
 
@@ -119,7 +119,7 @@ function setupPeerjs(apikey) {
   function connectTo(myPeer, remotePeerId, myPeerId) {
       log.i("connectTo()");
 
-    if(!conn) { conn = myPeer.connect(remotePeerId, {label : myPeerId}) }; 
+    if(!conn) { conn = myPeer.connect(remotePeerId, {label : myPeerId});}
 
     conn.on('open', function() {
       log.i('DataChannel sender open');
@@ -171,7 +171,7 @@ function setupPeerjs(apikey) {
       $('#remote-video').prop('muted', false);
       $('#remote-mute').text('Remote Mute');
     } else {
-      $('#remote-video').prop('muted', true)
+      $('#remote-video').prop('muted', true);
       $('#remote-mute').text('Remote Unmute');
     }
   });
