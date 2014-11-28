@@ -76,8 +76,8 @@ function setupPeerjs(apikey) {
   var myPeerId = "";
 
   peer.on('open', function(id) {
-      log.i(id);
-      $('#my-id').html(id);
+    console.log(id);
+    $('#my-id').html(id);
   });
 
   // Receiver callbacks
