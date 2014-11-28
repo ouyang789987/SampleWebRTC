@@ -1,5 +1,8 @@
 // Constants
 
+// DEBUG
+var IS_DEBUG_MEMBER = true;
+
 // WebSocket connection
 var WS_PORT = "3001";
 var PREFIX = "ws";
