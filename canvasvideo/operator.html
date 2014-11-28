@@ -35,8 +35,11 @@
   <li>
   Remote video
   </li>
-  <video id="remote-video" class="video" autoplay muted></video>
-
+  
+  <div id="container" class="container">
+    <video id="remote-video" class="overlayVideo" autoplay muted></video>
+    <canvas id="canvas" class="canvas" width="640px" height="480px"></canvas>
+  </div>
  
   <li>
     User-Agent : <span id="ua"></span>
