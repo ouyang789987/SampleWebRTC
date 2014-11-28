@@ -151,7 +151,7 @@ function setupPeerjs(apikey) {
 
   // User event callback
   $('#call').on('click', function() {
-    if( $('#remoteId').val() == "") {
+    if( $('#remote-id').val() === "") {
       return true;
     } 
     callTo($('#remote-id').val());

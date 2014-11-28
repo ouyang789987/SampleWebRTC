@@ -25,7 +25,7 @@ function trackingTouch() {
   var frmtMsg = x + "," + y;
 
   // console.log(frmtMsg);
-  if(conn == null) {
+  if(conn === null) {
     return true;
   }
 
@@ -44,7 +44,7 @@ function trackingMouse(evt) {
 
   var frmtMsg = x + "," + y;
   // console.log(frmtMsg);
-  if(conn == null) {
+  if(conn === null) {
     return true;
   }
   
