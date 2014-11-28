@@ -35,15 +35,17 @@ function trackingTouch() {
 }
 
 // マウスの軌跡を取得する
+var rect = null;
+var x, y = 0;
 function trackingMouse(evt) {
   $('#detectEvent').val(evt.type);
   
   var rect = evt.target.getBoundingClientRect();
-  var x = evt.clientX - rect.left;
-  var y = evt.clientY - rect.top;
+  x = evt.clientX - rect.left;
+  y = evt.clientY - rect.top;
 
   var frmtMsg = x + "," + y;
-  // console.log(frmtMsg);
+
   if(conn === null) {
     return true;
   }

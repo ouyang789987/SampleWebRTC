@@ -12,7 +12,9 @@ var conn = null;
 // Logging
 var log =  {
     i : function(msg) {
-      console.log('Info : ' + msg);
+      if( IS_DEBUG_MEMBER ) {
+        console.log('Info : ' + msg);
+      }
     },
     e : function(msg) {
       console.error('Error : ' + msg);
@@ -88,6 +90,7 @@ function setupPeerjs(apikey) {
   });
 
   // DataConnection
+  var msg = null;
   peer.on('connection', function(c) {
     log.i('connect ' + c.label);
 
@@ -96,7 +99,7 @@ function setupPeerjs(apikey) {
     c.on('open', function() {
       log.i('DataChannel open');
       c.on('data', function(data) {
-        var msg = data;
+        msg = data;
 
         log.i('DataChannel - receieved : ' + msg);
         $('#receivedAxis').val(msg);
