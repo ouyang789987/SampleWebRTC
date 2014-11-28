@@ -117,10 +117,15 @@ function setupPeerjs(apikey) {
         x_px = axes[0];
         y_px = axes[1];
 
-        ctx.clearRect(0, 0, VGA_WIDTH_PX, VGA_HEIGHT_PX);
-        ctx.strokeRect(x - MARKER_SIZE_Y/2,
-                               y - MARKER_SIZE_Y/2,
+        ctx.clearRect(lastX - MARKER_SIZE_X,
+                             lastY - MARKER_SIZE_Y ,
+                             lastX + MARKER_SIZE_X,
+                             lastY + MARKER_SIZE_Y);
+        ctx.strokeRect(x_px - MARKER_SIZE_Y/2,
+                               y_px - MARKER_SIZE_Y/2,
                                MARKER_SIZE_X, MARKER_SIZE_Y);
+        lastX = x_px;
+        lastY = y_px;
       });
 
       printRemoteLabel(c.label);
