@@ -2,19 +2,27 @@ var rect = null;
 var x, y = 0;
 var frmtMsg ="";
 var lastTime = null;
+var nowTime = null;
+
 function canvasInit() {
   var canvas = $('canvas')[0];
   var ctx = canvas.getContext('2d');
   ctx.strokeStyle = "rgb(200, 0, 0)";
 
-  console.log("   "+getDevice);
+  var lastTime = Date.now();
 
   if( getDevice === "other") {
     console.log(" Device : PC!");
-    $('canvas').mousemove(function(evt){ trackingMouse(evt);} );
+    $('canvas').mousemove(
+      function(evt){
+        if( isPastTimeMills() ) trackingMouse(evt);
+      });
   } else {
     console.log(" Device : Mobile!!");
-    $('canvas').bind('touchmove', function() { trackingTouch(); }); 
+    $('canvas').bind('touchmove',
+      function() {
+        if( isPastTimeMills() ) trackingTouch();
+      }); 
   }
 }
 
@@ -29,7 +37,6 @@ function trackingTouch() {
 
   frmtMsg = x + "," + y;
 
-  // console.log(frmtMsg);
   if(conn === null) {
     return true;
   }
@@ -40,7 +47,9 @@ function trackingTouch() {
 }
 
 // マウスの軌跡を取得する
+// 指定したFPS以下の頻度で軌跡を送信する
 function trackingMouse(evt) {
+
   $('#detectEvent').val(evt.type);
   
   rect = evt.target.getBoundingClientRect();
@@ -56,8 +65,25 @@ function trackingMouse(evt) {
   $('#sendAxis').val(frmtMsg);
   log.i('DataChannel - send : ' + frmtMsg);
   conn.send(frmtMsg);
+
 }
 
+/**
+* 指定したFPS以下の時間が経過したか判定する
+* @return true:指定FPSより時間が経過した．false:経過していない
+**/
+function isPastTimeMills() {
+  
+  nowTime = Date.now();
+
+  if( nowTime - lastTime < (ONE_SECOND_MILLS / MAX_FPS) ) {    
+    return false;
+  }
+  console.log(nowTime - lastTime);
+  lastTime = nowTime;
+
+  return true;
+}
 /**
  * return device type
  *  @return     sp:SmartPhone, tab:Tablet, other: other
