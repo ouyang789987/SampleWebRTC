@@ -19,10 +19,6 @@ function websocketInit() {
 	};
 }
 
-// Constants@Canvas
-var VGA_WIDHT_PX = 640;
-var VGA_HEIGHT_PX = 480;
-
 function canvasInit() {
 	var canvas = $('canvas')[0];
   var ctx = canvas.getContext('2d');
@@ -33,7 +29,7 @@ function canvasInit() {
     var x = evt.clientX - rect.left;
     var y = evt.clientY - rect.top;
     log.i(x + " " + y);
-    ctx.clearRect(0, 0, VGA_WIDHT_PX, VGA_HEIGHT_PX);
+    ctx.clearRect(0, 0, VGA_WIDTH_PX, VGA_HEIGHT_PX);
     ctx.strokeRect(x, y, 20, 20);
   });
 
