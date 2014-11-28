@@ -43,4 +43,3 @@ function canvasDrawAxis(x_px, y_px) {
 }
 
 window.addEventListener('load', websocketInit, false);
-// window.addEventListener('load', canvasInit, false);
