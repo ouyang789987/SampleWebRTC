@@ -91,13 +91,14 @@ function setupPeerjs(apikey) {
 
   // DataConnection
   var msg = null;
-  var axis = new Array(AXIS_ARRAY_LENGTH);
-  var x, y = 0;
+  var axes = new Array(AXIS_ARRAY_LENGTH);
+  var x_px, y_px = 0;
   var canvas = $('canvas')[0];
   var ctx = canvas.getContext('2d');
   ctx.lineWidth = 10;
   ctx.strokeStyle = "rgb(204, 0, 0)";
-  
+  var lastX, lastY = 0;
+
   peer.on('connection', function(c) {
     log.i('connect ' + c.label);
 
@@ -111,11 +112,10 @@ function setupPeerjs(apikey) {
         log.i('DataChannel - receieved : ' + msg);
         $('#receivedAxis').val(msg);
 
-        axis = data.split( ',' );
+        axes = data.split( ',' );
 
-        // axis -> axes
-        x = axis[0];
-        y = axis[1];
+        x_px = axes[0];
+        y_px = axes[1];
 
         ctx.clearRect(0, 0, VGA_WIDTH_PX, VGA_HEIGHT_PX);
         ctx.strokeRect(x - MARKER_SIZE_Y/2,

@@ -1,6 +1,6 @@
 
 function canvasInit() {
-	var canvas = $('canvas')[0];
+  var canvas = $('canvas')[0];
   var ctx = canvas.getContext('2d');
   ctx.strokeStyle = "rgb(200, 0, 0)";
 
