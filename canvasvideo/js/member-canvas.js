@@ -55,5 +55,3 @@ function trackingMouse(evt) {
   log.i('DataChannel - send : ' + frmtMsg);
   conn.send(frmtMsg);
 }
-
-window.addEventListener('load', canvasInit, false);

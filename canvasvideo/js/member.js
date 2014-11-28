@@ -204,4 +204,7 @@ function initUI(){
   }
 }
 
-window.addEventListener('load', init, false);
+$(document).ready(function() {
+  init();
+  canvasInit();
+});
